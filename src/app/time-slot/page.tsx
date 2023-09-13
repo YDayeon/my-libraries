@@ -1,12 +1,6 @@
 'use client';
 
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function makeTimeArray(limit: number): number[] {
   let array = new Array(limit);

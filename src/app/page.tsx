@@ -9,7 +9,7 @@ export default function Home() {
           <Link href='/time-slot'>Time Slot</Link>
         </li>
         <li className='bg-orange-400 py-2 justify-center rounded-lg flex'>
-          <Link href='/minimap'>Minimap</Link>
+          <Link href='/mini-map'>Minimap</Link>
         </li>
         <li></li>
       </ul>

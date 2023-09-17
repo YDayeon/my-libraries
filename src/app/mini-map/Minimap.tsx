@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { TouchEvent, useEffect, useRef } from 'react';
+import React, { MouseEvent, TouchEvent, useEffect, useRef } from 'react';
 
 type Props = {
   touchMoveMinimap: (event: TouchEvent<HTMLDivElement>) => void;

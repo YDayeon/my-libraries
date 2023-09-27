@@ -23,7 +23,7 @@ export default function RootLayout({
         <h1>
           <Link href='/'>My Libraries</Link>
         </h1>
-        <div className='w-full fledx justify-center py-10 px-24 grow'>
+        <div className='w-full flex justify-center grow'>
           {children}
         </div>
       </body>

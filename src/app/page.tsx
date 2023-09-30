@@ -11,7 +11,9 @@ export default function Home() {
         <li className='bg-orange-400 py-3 justify-center rounded-lg flex w-full max-w-md'>
           <Link href='/mini-map'>Minimap</Link>
         </li>
-        <li></li>
+        <li className='bg-yellow-400 py-3 justify-center rounded-lg flex w-full max-w-md'>
+          <Link href='/search-box'>Search Box</Link>
+        </li>
       </ul>
     </main>
   );

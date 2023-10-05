@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import SVGIMG from "../../public/assets/online-library.svg"
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +22,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} h-full flex flex-col items-center w-full py-24`}
       >
+        <Link href={"/"} className='mb-4 rounded-full flex justify-center items-center'>
+          <Image src={SVGIMG} alt="library icon" width={40} height={40} />
+        </Link>
         <h1>
           <Link href='/'>My Libraries</Link>
         </h1>

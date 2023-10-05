@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import escapeRegExp from 'lodash.escaperegexp';
+import { Mock } from './page';
 
 function useSearch() {
   const [prevKeyword, setPrevKeyword] = useState('');
@@ -8,7 +9,7 @@ function useSearch() {
     prevPattern: new RegExp(''),
     curPattern: new RegExp(''),
   });
-  const handleKeyword = (e) => {
+  const handleKeyword = (e:React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPrevKeyword(
       value === ''
@@ -20,7 +21,7 @@ function useSearch() {
     setCurKeyword(value.replace(' ', ''));
   };
 
-  const getFinalConstantVowel = (keyword) => {
+  const getFinalConstantVowel = (keyword:string) => {
     const t = [
       '',
       'ㄱ',
@@ -53,15 +54,16 @@ function useSearch() {
     ];
 
     const ga = 44032;
-    let uni = keyword.charCodeAt(0);
+    let uni:number = keyword.charCodeAt(0);
 
     uni = uni - ga;
 
-    let tn = parseInt(uni % 28);
+    let tn = uni % 28;
     return t[tn];
   };
 
-  const ch2pattern = (char) => {
+  const ch2pattern = (inputChar:string) => {
+    const char = inputChar
     const offset = 44032; /* '가'의 코드 */
     // 한국어 음절
     if (/[가-힣]/.test(char)) {
@@ -74,9 +76,12 @@ function useSearch() {
       const end = begin + 27;
       return `[\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
     }
+    type ObjType = {
+      [key:string]:number
+    }
     // 한글 자음
     if (/[ㄱ-ㅎ]/.test(char)) {
-      const con2syl = {
+      const con2syl:ObjType = {
         ㄱ: '가'.charCodeAt(0),
         ㄲ: '까'.charCodeAt(0),
         ㄴ: '나'.charCodeAt(0),
@@ -97,7 +102,7 @@ function useSearch() {
     return escapeRegExp(char);
   };
 
-  const createFuzzyMatcher = (keyword) => {
+  const createFuzzyMatcher = (keyword:string) => {
     const pattern = keyword
       .split('')
       .map(ch2pattern)
@@ -106,7 +111,7 @@ function useSearch() {
     return new RegExp(pattern, 'gi');
   };
 
-  const highlight = (el, match, offset, string, ...groups) => {
+  const highlight = (el:Mock, match:string, offset:number, string:string, ...groups:string[]) => {
     if (match !== '') {
       if (groups.length === 1) {
         return `<mark>${match}</mark>`;
@@ -132,7 +137,7 @@ function useSearch() {
     return match;
   };
 
-  const highlightValue = (key, pattern, value) => {
+  const highlightValue = (key:string, pattern:RegExp, value:Mock) => {
     const re = /[<][^>]*[>]/g;
     const el = value;
     return key

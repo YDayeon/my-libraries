@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useSearch from './useSearch';
 
-type Mock = {
+export type Mock = {
   id: string;
   category: string;
   title: string;
@@ -38,7 +40,7 @@ const Box = styled.div`
   }
 `;
 
-export default function App() {
+export default function SearchBox() {
   const { handleKeyword, patterns, curKeyword, highlightValue } = useSearch();
   const [data, setData] = useState(mock);
 
@@ -78,7 +80,8 @@ export default function App() {
     setTimeout(() => {
       const allData = [...curData, ...prevData];
       const sortData = allData.sort((a, b) => {
-        if (!!a.distance && !!b.distance) a.distance - b.distance;
+        if (!!a.distance && !!b.distance) {return a.distance - b.distance};
+        return 0
       });
       setData(sortData);
     });

@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useSearch from './useSearch';
+import { IconContext } from 'react-icons/lib/esm/iconContext';
+import { BiSearchAlt } from "react-icons/bi"
 
 export type Mock = {
   id: string;
@@ -25,14 +27,23 @@ export type Mock = {
 };
 
 const Input = styled.input`
-  width: 80%;
+  flex-grow: 1;
+  height: 2em;
+  border-radius: 1em;
+  outline: none;
+  bordser: none;
+  padding: 0 1em;
+  color: black;
 `;
 const Box = styled.div`
-  background-color: lightblue;
-  padding: 5px;
+  border: 2px solid white;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
   margin: 10px;
   h5 {
-    color: rebeccapurple;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
     mark {
       background-color: transparent;
       color: red;
@@ -88,16 +99,22 @@ export default function SearchBox() {
   }, [patterns]);
 
   return (
-    <>
-      <h3>검색</h3>
-      <Input onChange={handleKeyword} value={curKeyword} />
+    <div className='flex flex-col xl:w-1/4'>
+      <div className='flex gap-3 w-full items-center mb-4'>
+        <h3>
+          <IconContext.Provider value={{ size: "2em"}}>
+            <BiSearchAlt />
+          </IconContext.Provider>
+          </h3>
+        <Input onChange={handleKeyword} value={curKeyword} />
+      </div>
       {data?.map((el, i) => (
         <Box key={i}>
           <h5 dangerouslySetInnerHTML={{ __html: el.title }}></h5>
           <p dangerouslySetInnerHTML={{ __html: el.contents }}></p>
         </Box>
       ))}
-    </>
+    </div>
   );
 }
 
